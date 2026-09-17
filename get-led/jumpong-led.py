@@ -14,13 +14,13 @@ gpio.output(leds, 0)
 
 cur = 0
 state = 0
+while True:
+    for led in leds:
+        gpio.output(led, 1)
+        time.sleep(0.05)
+        gpio.output(led, 0)
 
-for led in leds:
-    gpio.output(led, 1)
-    time.sleep(0.05)
-    gpio.output(led, 0)
-
-for led in reversed(leds):
-    gpio.output(led, 1)
-    time.sleep(0.05)
-    gpio.output(led, 0)
+    for led in reversed(leds):
+        gpio.output(led, 1)
+        time.sleep(0.05)
+        gpio.output(led, 0)
