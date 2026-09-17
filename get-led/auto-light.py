@@ -10,7 +10,7 @@ gpio.setup(led, gpio.OUT)
 gpio.setup(ls, gpio.IN)
 
 while True:
-    if gpio.input(bt) == 1:
+    if gpio.input(ls) == 1:
         state = 1
     else:
         state = 0
