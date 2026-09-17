@@ -31,5 +31,5 @@ while True:
     elif cur > 255:
         cur = 0
     gpio.output(leds, dec2bin(cur)) 
-
+    time.sleep(0.1)
     
