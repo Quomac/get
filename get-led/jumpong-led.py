@@ -13,10 +13,12 @@ gpio.setup(leds, gpio.OUT)
 gpio.output(leds, 0)
 
 cur = 0
+state = 0
 
 while True:
-    cur+=1
-    if cur >= 7:
+    if cur >= 8:
         cur = 0
-    gpio.output(leds[cur], 1)
+        state = not state
+    gpio.output(leds[cur], state)
+    cur+=1
     time.sleep(1)

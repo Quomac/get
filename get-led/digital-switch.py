@@ -5,7 +5,7 @@ gpio.setmode(gpio.BCM)
 
 led = 26
 
-bt = 13
+bt = 6
 
 state = 0
 
