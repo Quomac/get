@@ -15,10 +15,12 @@ gpio.output(leds, 0)
 cur = 0
 state = 0
 
-while True:
-    if cur >= 8:
-        cur = 0
-        state = not state
-    gpio.output(leds[cur], state)
-    cur+=1
-    time.sleep(1)
+for led in leds:
+    gpio.output(led, 1)
+    time.sleep(0.05)
+    gpio.output(led, 0)
+
+for led in reversed(leds):
+    gpio.output(led, 1)
+    time.sleep(0.05)
+    gpio.output(led, 0)
