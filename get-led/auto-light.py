@@ -4,7 +4,7 @@ import time
 gpio.setmode(gpio.BCM)
 
 led = 26
-ls = 13 
+ls = 6
 
 gpio.setup(led, gpio.OUT)
 gpio.setup(ls, gpio.IN)
