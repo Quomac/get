@@ -21,7 +21,7 @@ def dec2bin(value):
     return [int(element) for element in bin(value)[2:].zfill(8)]
 
 def number_to_dac(num):
-    gpio.output(leds, dec2bin(num))
+    gpio.output(leds, [int(element) for element in bin(value)[2:].zfill(8)])
     return 0
 
 
