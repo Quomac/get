@@ -5,13 +5,15 @@ class PWM_DAC:
         self.pin = gpio_pin
         self.freq = pwm_frequency
         self.range = dynamic_range
-        self.pwm = gpio.PWM(self.pin, 200)
         self.verbose = verbose
         self.duty = 0
-        self.pwm.start(self.duty)
 
         gpio.setmode(gpio.BCM)
         gpio.setup(self.pin, gpio.OUT, initial = 0)
+        
+        self.pwm = gpio.PWM(self.pin, self.range)
+
+        self.pwm.start(self.duty)
         
     def deinit(self):
         gpio.output(self.pin, 0)
@@ -41,6 +43,5 @@ if __name__ == "__main__":
 
             except ValueError:
                 print("Вы ввели не число. Попробуйте ещё раз\n")
-
-    finally:
-        dac.deinit()
+finally:
+    dac.deinit()
