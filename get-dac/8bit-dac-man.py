@@ -2,7 +2,7 @@ import RPi.GPIO as gpio
 
 gpio.setmode(gpio.BCM)
 
-leds = [16, 20, 21, ,25, 26, 17, 27, 22]
+leds = [16, 20, 21,25, 26, 17, 27, 22]
 
 dynamic_range = 3.3
 
