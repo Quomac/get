@@ -6,14 +6,13 @@ class PWM_DAC:
         self.freq = pwm_frequency
         self.range = dynamic_range
         self.verbose = verbose
-        self.duty = 0
 
         gpio.setmode(gpio.BCM)
         gpio.setup(self.pin, gpio.OUT, initial = 0)
         
-        self.pwm = gpio.PWM(self.pin, self.range)
+        self.pwm = gpio.PWM(self.pin, self.freq)
 
-        self.pwm.start(self.duty)
+        self.pwm.start(0)
         
     def deinit(self):
         gpio.output(self.pin, 0)
@@ -28,7 +27,7 @@ class PWM_DAC:
             print("Устанавлниваем 0.0 В")
             self.set_pwm(0)
         else:
-            self.set_pwm(int(voltage / self.range * self.freq))
+            self.set_pwm(int(voltage / self.range * 100))
 
         
 
