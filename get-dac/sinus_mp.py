@@ -26,20 +26,21 @@ class MCP4725:
         second_byte = number & 0xFF
         self.bus.write_byte_data(0x61, first_byte, second_byte)
 
-        if self.verbose:
-            print(f"Число: {number}, отправленные по I2C данные: [0x{(self.address << 1):02X}, 0x{first_byte:02X}, 0x{second_byte:02X}]\n")
+        #if self.verbose:
+            #print(f"Число: {number}, отправленные по I2C данные: [0x{(self.address << 1):02X}, 0x{first_byte:02X}, 0x{second_byte:02X}]\n")
     def set_voltage(self, voltage):
-        if not (0.0 <= voltage <= self.range):
+        if not (0.0 <= voltage <= self.dynamic_range):
             print(f"Напряжение выходит за динамический диапазон ЦАП (0.00 - {self.range:.2f} В)")
             print("Устанавлниваем 0.0 В")
             self.set_number(0)
         else:
-            self.set_number(voltage*4096/self.dynamic_range)
+            print(int(voltage*4096//self.dynamic_range))
+            self.set_number(int(voltage*4095//self.dynamic_range))
         
 
 if __name__ == "__main__":
     try:
-        dac = MCP4725(12, 3.290)
+        dac = MCP4725(5)
         
         while True:
             try:
