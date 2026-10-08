@@ -13,15 +13,25 @@ time_measure = 0.001
 x = []
 y = []
 
+sampl_per = []
+
+#print(r2r.get_sc_voltage())
+
+
 def plot_voltage_vs_time(time_dur):
     time_null_def = time.time()
     while (time.time()-time_null_def < time_dur):
-        x.append(time.time()-time_null_def)
-        y.append(r2r.get_sc_voltage)
-        time.sleep(time_measure)
+        x0 = time.time()-time_null_def
+        x.append(x0)
+        y0 = r2r.get_sc_voltage()
+        y.append(y0)
+        #time.sleep(time_measure)
+        print(y0)
+        sampl_per.append(time.time()-x0)
 
 plot_voltage_vs_time(3)
-
+plt.figure(figsize=(10,6))
+plt.hist(sampl_per)
 plt.figure(figsize=(10,6))
 
 plt.plot(x, y)

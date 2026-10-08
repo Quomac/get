@@ -3,7 +3,7 @@ import time
 
 
 class R2R_ADC:
-    def __init__(self, dynamic_range, compare_time, verbose = False):
+    def __init__(self, dynamic_range, compare_time = 0.01, verbose = False):
         self.dynamic_range = dynamic_range
         self.verbose = verbose
         self.compare_time = compare_time
@@ -26,13 +26,25 @@ class R2R_ADC:
         for x in range(256):
             self.number_to_dac(x)
             time.sleep(self.compare_time)
-            #print(x)
             if gpio.input(self.comp_gpio) == 1:
-                return x
+                return gpio.input(self.comp_gpio)
         return 255
-
     def get_sc_voltage(self):
-        #print(0, self.sequential_counting_adc())
         return (self.sequential_counting_adc()/255)*self.dynamic_range
     
+if __name__ == "__main__":
+    try:
+        adc = R2R_ADC(3.28)
+        
+        while True:
+            try:
+                voltage = adc.get_sc_voltage()
+                print(f"Измеренное напряжение: {voltage:.3f} В")
+                time.sleep(0.5)
+
+            except ValueError:
+                print("Вы ввели не число. Попробуйте ещё раз\n")
+
+    finally:
+        adc.deinit()
         
