@@ -23,7 +23,7 @@ class MCP3021:
     
 if __name__ == "__main__":
     try:
-        adc = MCP3021([16, 20, 21, 25, 26, 17, 27, 22], 3.2, True)
+        adc = MCP3021(5)
         
         while True:
             try:
