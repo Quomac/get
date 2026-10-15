@@ -17,17 +17,20 @@ class MCP3021:
         lower_data_byte = data >> 8
         upper_data_byte = data & 0xFF
         number = (upper_data_byte << 6) | (lower_data_byte >> 2)
-        if self.verbose:
-            print(f"Принятые данные: {data}, Старший байт: {upper_data_byte:x}, Младший байт: {lower_data_byte:x}, Число: {number}")
+        #if self.verbose:
+        print(f"Принятые данные: {data}, Старший байт: {upper_data_byte:x}, Младший байт: {lower_data_byte:x}, Число: {number}")
         return number
+    def get_voltage(self):
+        #print(0, self.sequential_counting_adc())
+        return (self.get_number()/1024)*self.dynamic_range
     
 if __name__ == "__main__":
     try:
-        adc = MCP3021(5)
+        adc = MCP3021(5.183)
         
         while True:
             try:
-                number = adc.get_number()
+                number = adc.get_voltage()
                 print(number)
                 time.sleep(0.5)
 
