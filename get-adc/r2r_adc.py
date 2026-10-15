@@ -35,10 +35,12 @@ class R2R_ADC:
         s = bin(0)[2:].zfill(8)
         for x in range(0, 8):
             self.number_to_dac(int(s[:x] + '1' + s[(x+1):], 2))
+            time.sleep(self.compare_time)
             if gpio.input(self.comp_gpio) == 1:
                 s = s[:x] + '0' + s[(x+1):]
             else:
                 s = s[:x] + '1' + s[(x+1):]
+            #print(s)
         return int(s, 2)
 
     def get_sc_voltage(self):
