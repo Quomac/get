@@ -30,9 +30,23 @@ class R2R_ADC:
             if gpio.input(self.comp_gpio) == 1:
                 return x
         return 255
+    
+    def successive_approximation_adc(self):
+        s = bin(0)[2:].zfill(8)
+        for x in range(0, 8):
+            self.number_to_dac(int(s[:x] + '1' + s[(x+1):], 2))
+            if gpio.input(self.comp_gpio) == 1:
+                s = s[:x] + '0' + s[(x+1):]
+            else:
+                s = s[:x] + '1' + s[(x+1):]
+        return int(s, 2)
 
     def get_sc_voltage(self):
         #print(0, self.sequential_counting_adc())
         return (self.sequential_counting_adc()/255)*self.dynamic_range
+    
+    def get_sa_voltage(self):
+        #print(0, self.sequential_counting_adc())
+        return (self.successive_approximation_adc()/255)*self.dynamic_range
     
         
