@@ -24,14 +24,14 @@ gpio.setup(14, gpio.OUT, initial = 0)
 gpio.output(14, 0)
 
 while True:
-    if r2r.get_voltage()<0.1:
+    if r2r.get_voltage()<0.05:
         break
     print("lol", r2r.get_voltage())
 
 gpio.output(14, 1)
 time_null_def = time.time()
 
-while (r2r.get_voltage()<3):
+while (r2r.get_voltage()<4.68):
     x0 = time.time()-time_null_def
     x.append(x0)
     y0 = r2r.get_voltage()
@@ -43,7 +43,7 @@ while (r2r.get_voltage()<3):
 gpio.output(14, 0)
 
 
-while (r2r.get_voltage()>0.5):
+while (r2r.get_voltage()>0.05):
     x0 = time.time()-time_null_def
     x.append(x0)
     y0 = r2r.get_voltage()
@@ -63,5 +63,5 @@ plt.grid(visible = True, which = 'minor', linestyle='--', linewidth = 1, color='
 plt.xlabel(r"$T, seconds$")
 plt.ylabel(r"$U, Volts$")
 
-plt.plot(x, y, label = 'grpah', marker = '', linestyle='-', color = '#ab34cf', linewidth = 1)
+plt.plot(x, y, label = 'grpah', marker = '', linestyle='-', color = '#abcf40', linewidth = 1)
 plt.show()
